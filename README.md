@@ -44,8 +44,10 @@ https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-me
 6. LIMIT: findFirst3, findFirst, findTop, findTop3 조회시 먼저 조회된 3개까지만 가져온다는 의미
 
 ●@Query
+ 
 간단간단한 쿼리를 정의할 때는 메소드이름으로 쿼리를 정의하는 spring-data-jpa의 방식을 쓰면되지만 복잡하고 길어지는 쿼리에서는 명칭을 정확히 정의하기 힘들기 때문에
 내가 원하는 새로운 메서드이름을 만들어서 사용하는 방법도 좋은 방법이다.
+ 
 @Query("select m from Member m where m.username= :username and m.age = :age")
 List<Member> findUser(@Param("username") String username, @Param("age") int
 age);
