@@ -36,6 +36,7 @@ AgeGreateThan : 내가 설정한 나이보다 더 큰 나이를 가진사람을 
 https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation 
  
 여러 가지 지원하는 케이스들을 볼 수 있음.
+ 
 2. 조회시 : findBy, readBy, getBy, queryBy등의 메소드 사용가능
 3. COUNT : countBy라고 하면 long으로 반환해준다
 4. EXISTS : existsBy라고 하면 boolean으로 반환해준다
