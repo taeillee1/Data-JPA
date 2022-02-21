@@ -6,6 +6,7 @@
 스프링 data jpa를 사용하면 @Repository 어노테이션을 사용하지않아도된다.
 
 SPRING-DATA-JPA 주요메서드
+
 1. save() :새로운 엔티티를 저장하는 메서드
 2. delete() : 엔티티하나를 삭제, 내부에서 EntityManager.remove()가 호출돋ㄴ다
 3. findByID(ID) : 조회 메서드
@@ -17,6 +18,7 @@ SPRING-DATA-JPA 주요메서드
 1. 메소드 이름으로 쿼리를 생성해줌
 
 순수 JPA를 사용하여 파라미터로 받은 age보다 age가 많은 사람의 이름을 가져오는 메소드는 아래처럼 복잡하게 짜야한다.
+
 public List<Member> findByUsernameAndAgeGreaterThan(String username, int age) {
  return em.createQuery("select m from Member m where m.username = :username 
 and m.age > :age")
@@ -26,6 +28,7 @@ and m.age > :age")
 } 
 
 하지만 spring-data-jpa를 이용하면
+ 
 List<Member> findByUsernameAndAgeGreaterThan(String username, int age); 이렇게 하면 충분하다. 메소드 이름을 분석하여 JPQL에 적용해주는 매우 편리한 기능을 가지고 있다.
 
 findBy : 해당 엔티티에 대해 SELECT FORM하겠다
