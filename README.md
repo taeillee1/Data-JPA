@@ -97,17 +97,19 @@ em.clear(); 이 두연산을 이용하여 영속성컨텍스트를 비워내면 
 해결 방법 : 패치조인을 이용하여 해결한다.
  
 ex)
-@Query("select m from Member m join fetch m.team")
  
+@Query("select m from Member m join fetch m.team")
 List<Member> findMemberFetchJoin();
 
+ 
 이런식으로 가짜 객체인 프록시를 사용하여 저장했다가 다시 조회하는 비효율적인 방법이 아닌 싹다 한번에 가져와서 조회를 한번에 수행하기 때문에 네트워크를 들낙날락하는 것이 매우 줄어들게 된다.
 
  ※하지만 spring-data-jpa는 더편하게 패치조인을 할 수 있는 방법을 제공해준다
 
  @EntityGraph(attributePaths = {"team"})
+    List<Member> findAllMembers(); 
  
-    List<Member> findAllMembers(); 이렇게 EntityGraph를 사용하면 더욱 간단하게 가능하다 arrtibutePaths에 추가한 team은 Member엔티티에 설정한 연관된 엔티티의 변수명을 적으면 된다.
+ 이렇게 EntityGraph를 사용하면 더욱 간단하게 가능하다 arrtibutePaths에 추가한 team은 Member엔티티에 설정한 연관된 엔티티의 변수명을 적으면 된다.
 
 
 ●Auditing : 엔티티를 생성,변경할 때 변경한 사람과 시간을 추적하기 위해 만드는 것
