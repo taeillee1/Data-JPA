@@ -8,6 +8,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import study.datajpa.entity.Member;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -43,6 +45,43 @@ class MemberJpaRepositoryTest {
 
         Assertions.assertThat(findMember1).isEqualTo(member1);
         Assertions.assertThat(findMember2).isEqualTo(member2);
+
+    }
+
+    @Test
+    public void paging(){
+        memberJpaRepository.save(new Member("member1",10));
+        memberJpaRepository.save(new Member("member2",10));
+        memberJpaRepository.save(new Member("member3",10));
+        memberJpaRepository.save(new Member("member4",10));
+        memberJpaRepository.save(new Member("member5",10));
+        memberJpaRepository.save(new Member("member6",10));
+
+        int age=10;
+        int offset = 2;
+        int limit =3;
+
+        //limit가 3이기 때문에 앞에서 3개까지만 뽑히는 것이다
+        List<Member> members = memberJpaRepository.findByPage(age,offset,limit);
+        long totalCount = memberJpaRepository.totalCount(age);
+
+        //그래서 사이즈가 3이여야함
+        Assertions.assertThat(members.size()).isEqualTo(3);
+        Assertions.assertThat(totalCount).isEqualTo(6);
+    }
+
+    @Test //벌크성 수정쿼리
+    @Rollback(value = false)
+    public void bulkUpdate(){
+        memberJpaRepository.save(new Member("member1",10));
+        memberJpaRepository.save(new Member("member2",20));
+        memberJpaRepository.save(new Member("member3",30));
+        memberJpaRepository.save(new Member("member4",40));
+        memberJpaRepository.save(new Member("member5",50));
+
+        int resultCount = memberJpaRepository.bulkAgePlus(20);
+
+        Assertions.assertThat(resultCount).isEqualTo(4);
 
     }
 }
