@@ -131,6 +131,7 @@ List<Member> findMemberFetchJoin();
 이것은 persist하기전에 즉 DB에 저장되는 create문이 실행되기전에 시간을 저장하는 것이고
 
 @PreUpdate -> DB에 해당 테이블의 update연산을실행할 때 같이 실행되게하는 어노테이션
+ 
     @PreUpdate
     public void preUpdate(){
         updatedDate = LocalDateTime.now();
@@ -147,10 +148,15 @@ List<Member> findMemberFetchJoin();
 일단 어플리케이션 실행 클래스에
 !!!!! @EnableJpaAuditing을 꼭 달아줘야한다.!!!!!
 
-@Getter
-@MappedSuperclass
+ ------------------------------------------------------------------------
+@Getter 
+ 
+@MappedSuperclass 
+ 
 @EntityListeners(AuditingEntityListener.class)
+ 
 public class BaseEntity {
+ 
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;
@@ -158,6 +164,7 @@ public class BaseEntity {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate; 
 }
+ ----------------------------------------------------------------------
  
 이렇게만하면 간단하게 사용할 수 있다 extend바꿔주는거 잊지말기
 
