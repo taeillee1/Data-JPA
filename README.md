@@ -151,15 +151,14 @@ List<Member> findMemberFetchJoin();
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
-
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
-    
+    private LocalDateTime lastModifiedDate; 
 }
+ 
 이렇게만하면 간단하게 사용할 수 있다 extend바꿔주는거 잊지말기
 
 
