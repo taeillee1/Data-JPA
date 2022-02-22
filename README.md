@@ -120,6 +120,8 @@ List<Member> findMemberFetchJoin();
 회원가입이라던지 엔티티를 만들었을 때의 시간을 알기위해서는
  
 @PrePersist -> DB에 해당 테이블의 insert연산을 실행할 때 같이 실행되게하는 어노테이션
+ 
+    @PrePersist
     public void prePersist(){
         LocalDateTime now = LocalDateTime.now();
         createdDate = now;
@@ -129,6 +131,7 @@ List<Member> findMemberFetchJoin();
 이것은 persist하기전에 즉 DB에 저장되는 create문이 실행되기전에 시간을 저장하는 것이고
 
 @PreUpdate -> DB에 해당 테이블의 update연산을실행할 때 같이 실행되게하는 어노테이션
+    @PreUpdate
     public void preUpdate(){
         updatedDate = LocalDateTime.now();
     }
