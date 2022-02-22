@@ -169,6 +169,7 @@ class MemberRepositoryTest {
         List<Member> members = memberRepository.findByAge(10);
         for (Member member : members) {
             System.out.println("member =" + member.getUsername());
+            System.out.println("member =" + member.getTeam().getName());
         }
     }
 
