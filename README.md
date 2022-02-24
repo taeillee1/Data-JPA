@@ -171,4 +171,18 @@ public class BaseEntity {
  
 이렇게만하면 간단하게 사용할 수 있다 extend바꿔주는거 잊지말기
 
+ ● @PostConstruct란?
+
+의존성 주입이 이루어진 후 초기화를 수행하는 메서드
+이 어노테이션이 붙은 메서드는 다른 컨트롤러나 service에 의해 호출되지 않더라도 수행된다.(MemberController에 있음)
+
+●한페이지에 페이징 정보가 둘 이상이면 접두사로 구분할 수 있다.
+
+@Qualfier(“member”) Pageable memberPageable, @Qualfier(“order”) Pageable orederPageable 이렇게 pabeable 앞에 붙여주면 각각의 페이징정보를 사용할 수 있다.
+
+●Projections
+
+보통 findById같은 것을 해도 select *from 엔티티 m where id = :m.id 뭐이런식으로 전체를 조회하는데 전체를 조회하여 내가 원하는 내용물을가지고 오는 것이 아니라 정말 내가원하는 것들만 조회하고 싶을 때 사용할 수 있는 기능이다.
+즉 select절 뒤에 들어갈 내용을 정의하여 편하게 사용하는 것(UsernameOnlyDto, AgeOnlyDto로 연습해봄)
+
 
