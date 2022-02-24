@@ -1,6 +1,7 @@
 package study.datajpa.repository;
 
 import org.assertj.core.api.Assertions;
+import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,8 +18,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -184,6 +183,36 @@ class MemberRepositoryTest {
         List<Member> result = memberRepository.findMemberCustom();
         for (Member member : result) {
             System.out.println("member =" +member);
+        }
+    }
+
+    @Test
+    public void projections(){
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+
+        Member m1 = new Member("m1",10,teamA);
+        Member m2 = new Member("m2",20,teamA);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        List<UsernameOnlyDto> result = memberRepository.findProjectionsByUsername("m1");
+        for (UsernameOnlyDto usernameOnly : result) {
+            System.out.println("UsernameOnly =" + usernameOnly.getUsername());
+        }
+
+        List<AgeOnlyDto> result1 = memberRepository.findHelloByAgeAndUsername(10,"m1");
+        List<AgeOnlyDto> result2 = memberRepository.findHelloByAge(20);
+        for (AgeOnlyDto ageOnlyDto : result1) {
+            System.out.println("age =" + ageOnlyDto.getAge());
+            System.out.println("name =" + ageOnlyDto.getUsername());
+        }
+        for (AgeOnlyDto ageOnlyDto : result2) {
+            System.out.println("age2 =" + ageOnlyDto.getAge());
+            System.out.println("name2 =" + ageOnlyDto.getUsername());
         }
     }
 

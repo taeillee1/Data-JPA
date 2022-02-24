@@ -10,11 +10,10 @@ import org.springframework.data.repository.query.Param;
 import study.datajpa.dto.MemberDto;
 import study.datajpa.entity.Member;
 
-import javax.persistence.Entity;
-import java.util.Collection;
 import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member,Long>, MemberRepositoryCustom{
+
 
     @Query("select m from Member m where m.username=:name and m.age =:age")
     List<Member> findUser(@Param("name") String username, @Param("age") int age);
@@ -42,4 +41,8 @@ public interface MemberRepository extends JpaRepository<Member,Long>, MemberRepo
     @EntityGraph(attributePaths = {"team"})
     List<Member> findByAge(@Param("age") int age);
 
+    List<UsernameOnlyDto> findProjectionsByUsername(@Param("username") String username);
+
+    List<AgeOnlyDto> findHelloByAgeAndUsername(@Param("age") int age, @Param("username") String username);
+    List<AgeOnlyDto> findHelloByAge(@Param("age") int age);
 }
